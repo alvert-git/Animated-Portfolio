@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Preloader from "../components/Preloader";
 import { Outlet } from "react-router-dom";
+import FluidCursor from "../components/FluidCursor";
 
 const Layout = () => {
     const [showPreloader, setShowPreloader] = useState(true);
@@ -22,6 +23,8 @@ const Layout = () => {
 
     return (
         <>
+           <FluidCursor/>
+           
             {/* header*/}
             <Navbar />
             {/* main */}

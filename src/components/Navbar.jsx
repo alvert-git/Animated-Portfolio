@@ -20,7 +20,7 @@ const Navbar = () => {
   return (
     // Outer container for the full width navbar
     // Added shadow-sm for better visual separation
-    <nav className="bg-white p-4 ">
+    <nav className="bg-white p-4 cursor-pointer ">
       {/* Inner container to hold the content and apply the flex layout */}
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         
