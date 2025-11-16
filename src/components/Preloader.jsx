@@ -38,7 +38,7 @@ const Preloader = () => {
           yPercent: 0, // Move to its original position
           opacity: 1,
           stagger: 0.05, // Staggered entry for each letter
-          duration: 1.2,
+          duration: 2,
           ease: 'power3.out',
           delay: 0.3 // Start slightly after the component mounts
         }
@@ -92,9 +92,9 @@ const Preloader = () => {
       </div>
       
       {/* Main Content (Hidden until preloader is done) */}
-      <div className="flex items-center justify-center h-full bg-gray-900 text-white">
+      {/* <div className="flex items-center justify-center h-full bg-gray-900 text-white">
         <p className="text-xl opacity-30">Your main content goes here...</p>
-      </div>
+      </div> */}
     </div>
   );
 };
