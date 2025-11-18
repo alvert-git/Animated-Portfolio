@@ -38,7 +38,7 @@ const Preloader = () => {
           yPercent: 0, // Move to its original position
           opacity: 1,
           stagger: 0.05, // Staggered entry for each letter
-          duration: 2,
+          duration: 2.5,
           ease: 'power3.out',
           delay: 0.3 // Start slightly after the component mounts
         }
@@ -73,13 +73,19 @@ const Preloader = () => {
       {/* Preloader overlay */}
       <div
         ref={preloaderRef}
-        className="fixed inset-0 h-screen flex flex-col justify-start items-start bg-stone-50 text-gray-900 z-50 p-6 sm:p-10 md:p-16 lg:p-20"
+        className="fixed inset-0 h-screen flex flex-col 
+          justify-center items-center md:justify-start md:items-start 
+          bg-stone-50 text-gray-900 z-50 p-6 sm:p-10 md:p-16 lg:p-20"
       >
         
         {/* Portfolio Title with Split Animation Setup 
-          Added: text-gray-900 for a solid dark color.
+          - Gradient added (bg-clip-text, text-transparent, bg-gradient-to-r...)
+          - Centering added (text-center, md:text-left)
         */}
-        <h1 className="text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] font-extrabold text-gray-900 flex overflow-hidden leading-none tracking-tight">
+        <h1 className="text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] font-extrabold 
+          overflow-hidden leading-none tracking-tight 
+          text-center md:text-left 
+          bg-clip-text text-gray-800">
           {splitText('Portfolio', titleRefs)}
         </h1>
         
@@ -90,11 +96,6 @@ const Preloader = () => {
           <span ref={counterRef}>{counter}</span>
         </div>
       </div>
-      
-      {/* Main Content (Hidden until preloader is done) */}
-      {/* <div className="flex items-center justify-center h-full bg-gray-900 text-white">
-        <p className="text-xl opacity-30">Your main content goes here...</p>
-      </div> */}
     </div>
   );
 };

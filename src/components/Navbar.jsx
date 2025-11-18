@@ -96,7 +96,7 @@ const Navbar = () => {
               ))}
               
               {/* Contact Me Link (Mobile) */}
-              <li className="p-4 text-base font-semibold text-black mt-2" onClick={handleNav}>
+              <li className="p-4 border-b border-gray-100 text-gray-700 hover:text-black transition duration-150 ease-in-out" onClick={handleNav}>
                 <a href="#contact">Contact Me.</a>
               </li>
             </ul>

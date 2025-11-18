@@ -8,6 +8,8 @@ import FluidCursor from "../components/FluidCursor";
 const Layout = () => {
     const [showPreloader, setShowPreloader] = useState(true);
 
+    
+
     useEffect(() => {
         // Hide preloader after 4 seconds (adjust timing based on your animation duration)
         const timer = setTimeout(() => {
