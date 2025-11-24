@@ -1,5 +1,8 @@
 import React from 'react'
 import Hero from './Hero'
+import About from './About'
+import Skills from './Skill'
+import Project from './Project'
 
 const Home = () => {
   return (
@@ -17,9 +20,14 @@ const Home = () => {
 //     </div>
 // );
 //     </section>
-<div className='p-4 max-w-7xl mx-auto flex justify-between items-center'>
-  <Hero/>
+// {/* <div className='p-4 max-w-7xl mx-auto flex justify-between items-center'> */}
+<div className='max-w-7xl mx-auto'> 
+    <Hero/>
+    <About/>
+    <Skills/>
+    {/* <Project/> */}
 </div>
+
   )
 }
 

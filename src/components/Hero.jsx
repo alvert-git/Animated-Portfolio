@@ -37,21 +37,7 @@ const Hero = () => {
         }
       );
 
-      // 2. Profile image fades in with scale
-      tl.fromTo(
-        profileRef.current,
-        {
-          opacity: 0,
-          scale: 0.9,
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 1,
-          ease: "power2.out",
-        },
-        "-=0.8"
-      );
+      
 
       // 3. Extra decorative elements fade in with rotation
       if (extra1Ref.current) {
@@ -133,13 +119,13 @@ const Hero = () => {
       className="min-h-[calc(100vh-5rem)] w-full text-black relative overflow-hidden flex flex-col md:flex-row z-10 py-8 md:py-0"
     >
       {/* Mobile Layout: Image at top, text below, icons in row at bottom */}
-      <div className="md:hidden flex flex-col items-center w-full px-5">
+      <div className="md:hidden flex flex-col items-center w-full px-5 ">
         {/* Profile Image - Mobile Top */}
         <div ref={profileRef} className="w-full flex justify-center mb-6">
           <img
             src={profile}
             alt="profile"
-            className="w-64 h-80 object-cover rounded-2xl"
+            className="w-64 h-90 object-cover rounded-2xl"
             style={{
               maskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
               WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
