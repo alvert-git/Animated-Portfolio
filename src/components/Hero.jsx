@@ -1,11 +1,11 @@
 import React, { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
-import profile from "../assets/images/Profile.png";
-import hero_extra_1 from "../assets/images/hero_extra_1.png";
-import hero_extra_2 from "../assets/images/hero_extra_2.png";
 import { FaFacebookSquare, FaInstagramSquare, FaLinkedin, FaGithub } from "react-icons/fa";
 import { IoChatboxEllipses } from "react-icons/io5";
 import { HiDownload } from "react-icons/hi";
+import profile from "../assets/images/Profile.png";
+import hero_extra_1 from "../assets/images/hero_extra_1.png";
+import hero_extra_2 from "../assets/images/hero_extra_2.png";
 
 const Hero = () => {
   // Refs for GSAP animations
@@ -37,56 +37,58 @@ const Hero = () => {
         }
       );
 
-      // 2. Profile image scales in from bottom
-      // tl.fromTo(
-      //   profileRef.current,
-      //   {
-      //     y: 100,
-      //     opacity: 0,
-      //     scale: 0.95,
-      //   },
-      //   {
-      //     y: 0,
-      //     opacity: 1,
-      //     scale: 1,
-      //     duration: 1.2,
-      //     ease: "power3.out",
-      //   },
-      //   "-=0.6"
-      // );
-
-      // 3. Extra decorative elements fade in with rotation
+      // 2. Profile image fades in with scale
       tl.fromTo(
-        extra1Ref.current,
+        profileRef.current,
         {
           opacity: 0,
-          rotation: -15,
-          scale: 0.8,
+          scale: 0.9,
         },
         {
           opacity: 1,
-          rotation: 0,
           scale: 1,
-          duration: 0.8,
-          ease: "back.out(1.7)",
-        },
-        "-=0.4"
-      );
-
-      tl.fromTo(
-        extra2Ref.current,
-        {
-          opacity: 0,
-          x: 20,
-        },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.8,
+          duration: 1,
           ease: "power2.out",
         },
-        "-=0.6"
+        "-=0.8"
       );
+
+      // 3. Extra decorative elements fade in with rotation
+      if (extra1Ref.current) {
+        tl.fromTo(
+          extra1Ref.current,
+          {
+            opacity: 0,
+            rotation: -15,
+            scale: 0.8,
+          },
+          {
+            opacity: 1,
+            rotation: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+          },
+          "-=0.4"
+        );
+      }
+
+      if (extra2Ref.current) {
+        tl.fromTo(
+          extra2Ref.current,
+          {
+            opacity: 0,
+            x: 20,
+          },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "-=0.6"
+        );
+      }
 
       // 4. Social icons slide in from bottom with stagger
       tl.fromTo(
@@ -120,37 +122,6 @@ const Hero = () => {
         },
         "-=0.3"
       );
-
-      // Hover animations for interactive elements
-      // const socialIcons = socialRef.current.querySelectorAll("svg");
-      // socialIcons.forEach((icon) => {
-      //   icon.addEventListener("mouseenter", () => {
-      //     gsap.to(icon, {
-      //       scale: 1.2,
-      //       rotation: 5,
-      //       duration: 0.3,
-      //       ease: "power2.out",
-      //     });
-      //   });
-      //   icon.addEventListener("mouseleave", () => {
-      //     gsap.to(icon, {
-      //       scale: 1,
-      //       rotation: 0,
-      //       duration: 0.3,
-      //       ease: "power2.out",
-      //     });
-      //   });
-      // });
-
-      // Floating animation for extra elements
-      // gsap.to(extra1Ref.current, {
-      //   y: -10,
-      //   duration: 2,
-      //   repeat: -1,
-      //   yoyo: true,
-      //   ease: "sine.inOut",
-      // });
-
     });
 
     return () => ctx.revert();
@@ -159,91 +130,162 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="h-[calc(100vh-5rem)] w-full text-white relative overflow-hidden flex z-10"
+      className="min-h-[calc(100vh-5rem)] w-full text-black relative overflow-hidden flex flex-col md:flex-row z-10 py-8 md:py-0"
     >
-      {/* Left Text Section */}
-      <div className="absolute top-0 sm:relative sm:top-auto self-center ml-5 md:ml-10 lg:ml-16 z-20">
-        <p
-          ref={(el) => (heroTextRefs.current[0] = el)}
-          className="text-2xl md:text-3xl font-light text-gray-500 mb-1 font-inter"
-        >
-          Hi, I am
-        </p>
-        <h1
-          ref={(el) => (heroTextRefs.current[1] = el)}
-          className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-black tracking-tighter leading-tight mb-4"
-        >
-          Albert Belbase
-        </h1>
-        <div
-          ref={(el) => (heroTextRefs.current[2] = el)}
-          className="text-lg sm:text-xl md:text-2xl text-gray-600 font-serif italic leading-relaxed"
-        >
-          Data Scientist / <br />
-          Full Stack AI Developer.
+      {/* Mobile Layout: Image at top, text below, icons in row at bottom */}
+      <div className="md:hidden flex flex-col items-center w-full px-5">
+        {/* Profile Image - Mobile Top */}
+        <div ref={profileRef} className="w-full flex justify-center mb-6">
+          <img
+            src={profile}
+            alt="profile"
+            className="w-64 h-80 object-cover rounded-2xl"
+            style={{
+              maskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
+              WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
+            }}
+          />
         </div>
 
-        <div
-          ref={(el) => (heroTextRefs.current[3] = el)}
-          className="mt-8"
-        >
-          <a
-            href="#cv"
-            className="inline-flex items-center gap-2 border-b-2 border-gray-400 pb-1 text-blue-600 hover:text-black hover:border-black transition-all duration-300 group"
+        {/* Text Content - Mobile Center */}
+        <div className="text-center w-full">
+          <p
+            ref={(el) => (heroTextRefs.current[0] = el)}
+            className="text-xl font-light text-gray-500 mb-1 font-inter"
           >
-            <span className="text-base md:text-lg">Download CV</span>
-            <HiDownload className="transform group-hover:translate-y-1 transition-transform" />
-          </a>
+            Hi, I am
+          </p>
+          <h1
+            ref={(el) => (heroTextRefs.current[1] = el)}
+            className="text-3xl font-extrabold text-black tracking-tighter leading-tight mb-4"
+          >
+            Albert Belbase
+          </h1>
+          <div
+            ref={(el) => (heroTextRefs.current[2] = el)}
+            className="text-lg text-gray-600 font-serif italic leading-relaxed"
+          >
+            Data Scientist / <br />
+            Full Stack AI Developer.
+          </div>
+
+          <div
+            ref={(el) => (heroTextRefs.current[3] = el)}
+            className="mt-6"
+          >
+            <a
+              href="#cv"
+              className="inline-flex items-center gap-2 border-b-2 border-gray-400 pb-1 text-blue-600 hover:text-black hover:border-black transition-all duration-300 group"
+            >
+              <span className="text-base">Download CV</span>
+              <HiDownload className="transform group-hover:translate-y-1 transition-transform" />
+            </a>
+          </div>
+        </div>
+
+        {/* Social Icons and Chat - Mobile Row at Bottom */}
+        <div className="flex items-center justify-center gap-8 mt-8 w-full">
+          {/* Social Icons */}
+          <div ref={socialRef} className="flex gap-4 cursor-pointer">
+            <FaFacebookSquare color="black" size={24} className="hover:opacity-70 transition-opacity" />
+            <FaInstagramSquare color="black" size={24} className="hover:opacity-70 transition-opacity" />
+            <FaLinkedin color="black" size={24} className="hover:opacity-70 transition-opacity" />
+            <FaGithub color="black" size={24} className="hover:opacity-70 transition-opacity" />
+          </div>
+
+          {/* Chat Button */}
+          <div
+            ref={chatRef}
+            className="flex items-center gap-2 cursor-pointer hover:scale-105 transition-transform"
+          >
+            <span className="text-base font-bold text-black">Let's Chat</span>
+            <IoChatboxEllipses size={24} color="black" />
+          </div>
         </div>
       </div>
 
-      {/* Profile Image - Centered */}
-      <div ref={profileRef}>
-        <img
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-auto h-[35rem] sm:h-[40rem]  md:h-[45rem] object-cover z-10"
-          src={profile}
-          alt="profile"
-          style={{
-            maskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
-          }}
-        />
-      </div>
+      {/* Desktop Layout: Original design */}
+      <div className="hidden md:flex w-full h-[calc(100vh-5rem)] relative">
+        {/* Left Text Section */}
+        <div className="self-center ml-10 lg:ml-16 z-20">
+          <p
+            ref={(el) => (heroTextRefs.current[0] = el)}
+            className="text-3xl font-light text-gray-500 mb-1 font-inter"
+          >
+            Hi, I am
+          </p>
+          <h1
+            ref={(el) => (heroTextRefs.current[1] = el)}
+            className="text-5xl lg:text-6xl font-extrabold text-black tracking-tighter leading-tight mb-4"
+          >
+            Albert Belbase
+          </h1>
+          <div
+            ref={(el) => (heroTextRefs.current[2] = el)}
+            className="text-2xl text-gray-600 font-serif italic leading-relaxed"
+          >
+            Data Scientist / <br />
+            Full Stack AI Developer.
+          </div>
 
-      {/* Extra Decorative Image 1 - Hidden on small screens */}
-      <div
-        ref={extra1Ref}
-        className="hidden md:block absolute top-[10%] right-[15%] lg:right-[25%] z-20"
-      >
-        <img
-          src={hero_extra_1}
-          alt="decorative element"
-          className="w-auto h-16 md:h-20 lg:h-24"
-        />
-      </div>
-
-      {/* Right Side Elements - Social Icons and Chat */}
-      <div className="absolute right-3 sm:right-4 md:right-6 lg:right-10 bottom-3 sm:bottom-5 z-30 flex flex-col items-end">
-        {/* Extra Decorative Image 2 - Hidden on small screens */}
-        <div ref={extra2Ref} className="hidden lg:flex mb-4">
-          <img src={hero_extra_2} alt="decorative element" className="w-auto h-16 lg:h-20" />
+          <div
+            ref={(el) => (heroTextRefs.current[3] = el)}
+            className="mt-8"
+          >
+            <a
+              href="#cv"
+              className="inline-flex items-center gap-2 border-b-2 border-gray-400 pb-1 text-blue-600 hover:text-black hover:border-black transition-all duration-300 group"
+            >
+              <span className="text-lg">Download CV</span>
+              <HiDownload className="transform group-hover:translate-y-1 transition-transform" />
+            </a>
+          </div>
         </div>
 
-        {/* Social Icons */}
-        <div ref={socialRef} className="flex flex-col gap-2 sm:gap-3 cursor-pointer">
-          <FaFacebookSquare color="black" size={20} className="sm:w-6 sm:h-6 hover:opacity-70 transition-opacity" />
-          <FaInstagramSquare color="black" size={20} className="sm:w-6 sm:h-6 hover:opacity-70 transition-opacity" />
-          <FaLinkedin color="black" size={20} className="sm:w-6 sm:h-6 hover:opacity-70 transition-opacity" />
-          <FaGithub color="black" size={20} className="sm:w-6 sm:h-6 hover:opacity-70 transition-opacity" />
+        {/* Profile Image - Desktop Centered */}
+        <div ref={profileRef}>
+          <img
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-auto h-[40rem] lg:h-[40rem] 2xl:h-[45rem] object-cover z-10"
+            src={profile}
+            alt="profile"
+            style={{
+              maskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
+              WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
+            }}
+          />
         </div>
 
-        {/* Chat Button */}
+        {/* Extra Decorative Image 1 - Desktop Only */}
         <div
-          ref={chatRef}
-          className="flex items-center gap-1 sm:gap-2 cursor-pointer hover:scale-105 transition-transform mt-6 sm:mt-8"
+          ref={extra1Ref}
+          className="absolute top-[10%] right-[15%] lg:right-[25%] z-20"
         >
-          <span className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-black">Let's Chat</span>
-          <IoChatboxEllipses size={24} className="sm:w-7 sm:h-7" color="black" />
+          <div className="w-20 h-20 lg:w-24 lg:h-24 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-20"></div>
+        </div>
+
+        {/* Right Side Elements - Desktop */}
+        <div className="absolute right-6 lg:right-10 bottom-5 z-30 flex flex-col items-end">
+          {/* Extra Decorative Image 2 */}
+          <div ref={extra2Ref} className="lg:flex mb-4">
+            <div className="w-16 h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-pink-400 to-orange-500 rounded-full opacity-20"></div>
+          </div>
+
+          {/* Social Icons */}
+          <div ref={socialRef} className="flex flex-col gap-3 cursor-pointer">
+            <FaFacebookSquare color="black" size={24} className="hover:opacity-70 transition-opacity" />
+            <FaInstagramSquare color="black" size={24} className="hover:opacity-70 transition-opacity" />
+            <FaLinkedin color="black" size={24} className="hover:opacity-70 transition-opacity" />
+            <FaGithub color="black" size={24} className="hover:opacity-70 transition-opacity" />
+          </div>
+
+          {/* Chat Button */}
+          <div
+            ref={chatRef}
+            className="flex items-center gap-2 cursor-pointer hover:scale-105 transition-transform mt-8"
+          >
+            <span className="text-lg lg:text-xl font-bold text-black">Let's Chat</span>
+            <IoChatboxEllipses size={28} color="black" />
+          </div>
         </div>
       </div>
     </section>

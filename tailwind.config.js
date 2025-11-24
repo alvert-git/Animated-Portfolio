@@ -1,11 +1,13 @@
 // tailwind.config.js
+
 module.exports = {
   theme: {
     extend: {
-      height: {
-        'screen-safe': 'calc(var(--vh, 1vh) * 100)',
+      screens: {
+        // Define a custom screen size that triggers when the viewport height is 600px or less.
+        'h-short': { 'raw': '(max-height: 600px)' },
       },
     },
   },
-
+  plugins: [],
 }
