@@ -19,3 +19,9 @@
 body {
   font-family: var(--font-poppins);
 }
+
+.text-stroke {
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px black; /* Adjust color and thickness as needed */
+  color: transparent; /* Fallback for non-webkit browsers */
+}

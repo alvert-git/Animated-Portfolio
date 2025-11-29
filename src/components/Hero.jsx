@@ -11,6 +11,8 @@ const Hero = () => {
   // Refs for GSAP animations
   const heroTextRefs = useRef([]);
   const profileRef = useRef(null);
+  const profileMobileRef = useRef(null);
+  const profileDesktopRef = useRef(null);
   const extra1Ref = useRef(null);
   const extra2Ref = useRef(null);
   const socialRef = useRef(null);
@@ -55,7 +57,7 @@ const Hero = () => {
             duration: 0.8,
             ease: "back.out(1.7)",
           },
-          "-=0.4"
+          "<"
         );
       }
 
@@ -72,9 +74,52 @@ const Hero = () => {
             duration: 0.8,
             ease: "power2.out",
           },
-          "-=0.6"
+          "<"
         );
       }
+
+    //   if (profileDesktopRef.current) {
+    //   tl.fromTo(
+    //     profileDesktopRef.current.children,
+    //     {
+    //       y: 50, // Start 50px below its final position
+    //       opacity: 0,
+    //     },
+    //     {
+    //       y: 0, // End at its final position (which is centered horizontally by CSS)
+    //       opacity: 1,
+    //       duration: 1.2,
+    //       ease: "power3.out",
+    //     },
+    //     "<0.2" // Start this animation slightly after the text starts
+    //   );
+    // }
+    if (profileDesktopRef.current) {
+        // Target the image element (the first child of the ref container)
+        const profileImage = profileDesktopRef.current.children[0];
+        
+        tl.fromTo(
+          profileImage,
+          {
+            y: 50,
+            opacity: 0,
+            scale:0.8,
+            // Crucial: Manually set xPercent to -50 to maintain the horizontal centering
+            // This tells GSAP to include the -50% translateX in its transform calculation.
+            xPercent: -50, 
+          },
+          {
+            y: 0,
+            opacity: 1,
+            scale:1,
+            duration: 1.2,
+            ease: "power3.out",
+            xPercent: -50, // Maintain the centering in the final state too
+          },
+          "<0.2" // Start this animation slightly after the text starts
+        );
+      }
+
 
       // 4. Social icons slide in from bottom with stagger
       tl.fromTo(
@@ -90,7 +135,7 @@ const Hero = () => {
           stagger: 0.1,
           ease: "power2.out",
         },
-        "-=0.4"
+        "<"
       );
 
       // 5. Chat button bounces in
@@ -106,7 +151,7 @@ const Hero = () => {
           duration: 0.6,
           ease: "back.out(2)",
         },
-        "-=0.3"
+        "<"
       );
     });
 
@@ -121,10 +166,11 @@ const Hero = () => {
       {/* Mobile Layout: Image at top, text below, icons in row at bottom */}
       <div className="md:hidden flex flex-col items-center w-full px-5 ">
         {/* Profile Image - Mobile Top */}
-        <div ref={profileRef} className="w-full flex justify-center mb-6">
+        <div  className="w-full flex justify-center mb-6">
           <img
             src={profile}
             alt="profile"
+            ref={profileMobileRef}
             className="w-64 h-90 object-cover rounded-2xl"
             style={{
               maskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
@@ -229,17 +275,21 @@ const Hero = () => {
         </div>
 
         {/* Profile Image - Desktop Centered */}
-        <div ref={profileRef}>
+       <div ref={profileDesktopRef}>
+
           <img
             className="absolute bottom-0 left-1/2 -translate-x-1/2 w-auto h-[40rem] lg:h-[40rem] 2xl:h-[45rem] object-cover z-10"
             src={profile}
+            
             alt="profile"
             style={{
               maskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
               WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
             }}
           />
-        </div>
+       </div>
+       
+       
 
         {/* Extra Decorative Image 1 - Desktop Only */}
         <div
