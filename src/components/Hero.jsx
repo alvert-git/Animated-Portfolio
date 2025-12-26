@@ -104,8 +104,6 @@ const Hero = () => {
             y: 50,
             opacity: 0,
             scale:0.8,
-            // Crucial: Manually set xPercent to -50 to maintain the horizontal centering
-            // This tells GSAP to include the -50% translateX in its transform calculation.
             xPercent: -50, 
           },
           {
@@ -114,9 +112,9 @@ const Hero = () => {
             scale:1,
             duration: 1.2,
             ease: "power3.out",
-            xPercent: -50, // Maintain the centering in the final state too
+            xPercent: -50, 
           },
-          "<0.2" // Start this animation slightly after the text starts
+          "<0.2" 
         );
       }
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   // State to manage the visibility of the mobile menu
@@ -12,7 +13,7 @@ const Navbar = () => {
 
   const navItems = [
     { id: 1, text: 'About Me', href: '#about' },
-    { id: 2, text: 'Skills', href: '#skills' },
+    { id: 2, text: 'Skills', href: '#my-stack' },
     { id: 3, text: 'Projects', href: '#projects' },
     { id: 4, text: 'Blog', href: '#blog' },
   ];
@@ -28,9 +29,11 @@ const Navbar = () => {
         <div className="flex items-center space-x-12">
           
           {/* Logo/Name: Albert. (Always visible) */}
+         <Link to='/'>
           <div className="text-2xl font-extrabold text-black tracking-tight">
             Albert.
           </div>
+         </Link>
           
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex space-x-6 text-base text-gray-700">
@@ -50,12 +53,12 @@ const Navbar = () => {
         <div className="flex items-center space-x-4">
             
             {/* Contact Me Link (Desktop Only) */}
-            <a 
-              href="#contact" 
+            <Link
+              to="#contact" 
               className="hidden md:block text-base font-semibold text-black py-2 px-4 cursor-pointer"
             >
               Contact Me.
-            </a>
+            </Link>
             
             {/* Mobile Hamburger/Close Icon (Visible only on small screens) */}
             <div onClick={handleNav} className="block md:hidden cursor-pointer text-2xl z-20">

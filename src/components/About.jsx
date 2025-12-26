@@ -162,8 +162,8 @@ const About = () => {
   // Marquee content array for easier rendering
   const marqueeItems = [
     { text: 'WEB DEVELOPER', className: 'text-black' },
-    { text: 'WEB DEVELOPER', className: 'text-stroke' }, // Text Stroke Class
-    { text: 'Data Scientist', className: 'text-black' },
+    { text: 'DATA SCIENTIST', className: 'text-stroke' }, // Text Stroke Class
+    { text: 'UI/UX DEVELOPER', className: 'text-black' },
   ];
 
   return (

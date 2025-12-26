@@ -1,164 +1,71 @@
-import React, { useRef } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { PROJECTS } from '../lib/data'
+// Project.jsx
+import React, { useState, useMemo } from "react";
+import { projectsData } from '../lib/data';
+import ProjectCard from "./ui/ProjectCard"; 
 
-// NOTE: The following imports need to be adjusted based on your project structure.
-// In a standard React app, you would need to define or replace these.
-// 1. `TransitionLink` is replaced with a standard `<a>` tag.
-// 2. `cn` is a utility function (often for combining Tailwind classes).
-// 3. The `IProject` interface is removed, assuming `project` is a standard object.
+const Project = () => {
+  // 1. State to manage the currently selected filter category
+  const [filter, setFilter] = useState('All');
 
-// Utility function (assuming it's a simple class name combiner)
-// If you don't have this utility, you can replace `cn(...)` with a simple template literal.
-const cn = (...classes) => classes.filter(Boolean).join(' ');
+  // 2. Define all possible categories (including 'All')
+  const categories = ['All', 'Web Development', 'Data Science', 'UI/UX Design'];
 
-gsap.registerPlugin(useGSAP);
+  // 3. Use useMemo to filter the projects data efficiently
+  const filteredProjects = useMemo(() => {
+    if (filter === 'All') {
+      return projectsData;
+    }
+    // Filter projects where the category matches the selected filter
+    return projectsData.filter(project => project.category === filter);
+  }, [filter]); // Re-run the filter whenever the 'filter' state changes
 
-// Props are simplified for JSX
-const Project = ({ index, project, selectedProject, onMouseEnter }) => {
-    const externalLinkSVGRef = useRef(null);
+  // 4. Handler function for button clicks
+  const handleFilterChange = (newFilter) => {
+    setFilter(newFilter);
+  };
 
-    // useGSAP setup
-    const { context, contextSafe } = useGSAP(() => {}, {
-        scope: externalLinkSVGRef,
-        revertOnUpdate: true,
-    });
+  return (
+    <section id="projects">
+      <div className="max-w-7xl px-4 sm:px-6 lg:px-8 py-12 mx-auto">
+        <h2 className="text-5xl font-extrabold uppercase mb-10">
+          SELECTED PROJECT
+        </h2>
 
-    const handleMouseEnter = contextSafe(() => {
-        
+        {/* Category Filter Buttons */}
+        <div className="flex flex-wrap gap-3 mb-16">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => handleFilterChange(category)}
+              className={`
+                text-sm font-medium  
+                ${
+                  filter === category
+                    ? 'text-black ' // Active state
+                    : 'text-gray-400 hover:text-gray-800' // Inactive state
+                }
+              `}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
 
-        // Type casting is removed, relying on standard DOM element access
-        const arrowLine = externalLinkSVGRef.current?.querySelector('#arrow-line');
-        const arrowCurb = externalLinkSVGRef.current?.querySelector('#arrow-curb');
-        const box = externalLinkSVGRef.current?.querySelector('#box');
-
-        // Check if elements exist before calling getTotalLength
-        if (!box || !arrowLine || !arrowCurb) return;
-
-        gsap.set(box, {
-            opacity: 0,
-            strokeDasharray: box.getTotalLength(),
-            strokeDashoffset: box.getTotalLength(),
-        });
-        gsap.set(arrowLine, {
-            opacity: 0,
-            strokeDasharray: arrowLine.getTotalLength(),
-            strokeDashoffset: arrowLine.getTotalLength(),
-        });
-        gsap.set(arrowCurb, {
-            opacity: 0,
-            strokeDasharray: arrowCurb.getTotalLength(),
-            strokeDashoffset: arrowCurb.getTotalLength(),
-        });
-
-        const tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
-        tl.to(externalLinkSVGRef.current, {
-            autoAlpha: 1,
-        })
-            .to(box, {
-                opacity: 1,
-                strokeDashoffset: 0,
-            })
-            .to(
-                arrowLine,
-                {
-                    opacity: 1,
-                    strokeDashoffset: 0,
-                },
-                '<0.2',
-            )
-            .to(arrowCurb, {
-                opacity: 1,
-                strokeDashoffset: 0,
-            })
-            .to(
-                externalLinkSVGRef.current,
-                {
-                    autoAlpha: 0,
-                },
-                '+=1',
-            );
-    });
-
-    const handleMouseLeave = contextSafe(() => {
-        context.kill();
-    });
-
-    // NOTE: TransitionLink is replaced with a standard <a> tag.
-    // If you are using a routing library like React Router, you might replace this with `<Link to={...}>`.
-    return (
-        <a
-            href="https://youtube.com"
-            className={cn(
-                'project-item group leading-none py-5 md:border-b first:!pt-0 last:pb-0 last:border-none md:group-hover/projects:opacity-30 md:hover:!opacity-100 transition-all'
-            )}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-        >
-            {selectedProject === null && (
-                // Replaced Next.js Image with standard <img> tag
-                <img
-                    src={project.thumbnail}
-                    alt="Project"
-                    width="300"
-                    height="200"
-                    className={cn(
-                        'w-full object-cover mb-6 aspect-[3/2] object-top',
-                    )}
-                    loading="lazy"
-                />
-            )}
-            <div className="flex gap-2 md:gap-5">
-                <div className="font-anton text-muted-foreground">
-                    {/* The underscore is part of the string literal */}
-                    _{String(index + 1).padStart(2, '0')}.
-                </div>
-                <div className="">
-                    <h4 className="text-4xl xs:text-6xl flex gap-4 font-anton transition-all duration-700 bg-gradient-to-r from-primary to-foreground from-[50%] to-[50%] bg-[length:200%] bg-right bg-clip-text text-transparent group-hover:bg-left">
-                        {project.title}
-                        <span className="text-foreground opacity-0 group-hover:opacity-100 transition-all">
-                            {/* SVG for external link icon */}
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="36"
-                                height="36"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                ref={externalLinkSVGRef}
-                            >
-                                <path
-                                    id="box"
-                                    d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
-                                ></path>
-                                <path id="arrow-line" d="M10 14 21 3"></path>
-                                <path id="arrow-curb" d="M15 3h6v6"></path>
-                            </svg>
-                        </span>
-                    </h4>
-                    <div className="mt-2 flex flex-wrap gap-3 text-muted-foreground text-xs">
-                        {project.techStack
-                            .slice(0, 3)
-                            .map((tech, idx, stackArr) => (
-                                <div
-                                    className="gap-3 flex items-center"
-                                    key={tech}
-                                >
-                                    <span className="">{tech}</span>
-                                    {idx !== stackArr.length - 1 && (
-                                        <span className="inline-block size-2 rounded-full bg-background-light"></span>
-                                    )}
-                                </div>
-                            ))}
-                    </div>
-                </div>
-            </div>
-        </a>
-    );
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-20 md:gap-y-0 px-2 sm:px-2 md:px-4  min-h-[50vh] mt-10">
+          {filteredProjects.length > 0 ? (
+            filteredProjects.map((project, index) => (
+              <ProjectCard key={project.id} project={project} index={index} />
+            ))
+          ) : (
+            <p className="text-xl text-gray-500 col-span-full text-center">
+              No projects found in the "{filter}" category.
+            </p>
+          )}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Project;

@@ -25,7 +25,7 @@ const Layout = () => {
 
     return (
         <>
-           <FluidCursor/>
+           {/* <FluidCursor/> */}
            
             {/* header*/}
             <Navbar />
