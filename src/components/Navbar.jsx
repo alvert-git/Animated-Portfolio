@@ -62,7 +62,7 @@ const Navbar = () => {
             </Link>
             
             {/* Mobile Hamburger/Close Icon (Visible only on small screens) */}
-            <div onClick={handleNav} className="block md:hidden cursor-pointer text-2xl z-20">
+            <div onClick={handleNav} className="block md:hidden cursor-pointer text-2xl z-60">
               {/* Toggles between the menu and close icons */}
               {nav ? <AiOutlineClose /> : <AiOutlineMenu />}
             </div>
@@ -77,8 +77,8 @@ const Navbar = () => {
         <div
           className={
             nav
-              ? 'fixed md:hidden right-0 top-0 w-[70%] h-full border-l border-gray-100 bg-white ease-in-out duration-300 z-10'
-              : 'fixed right-[-100%] top-0 w-[70%] h-full bg-white ease-in-out duration-300 z-10'
+              ? 'fixed md:hidden right-0 top-0 w-[70%] h-full border-l border-gray-100 bg-white ease-in-out duration-300 z-50'
+              : 'fixed right-[-100%] top-0 w-[70%] h-full bg-white ease-in-out duration-300 z-50'
           }
         >
           <div className="p-4 pt-10">
