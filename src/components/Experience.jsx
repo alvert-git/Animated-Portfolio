@@ -98,22 +98,22 @@ const Experience = () => {
                     {MY_EXPERIENCE.map((item) => (
                         <div 
                             key={item.title} 
-                            className="experience-item cursor-pointer" 
-                            onMouseEnter={() => handleMouseEnter(item.letterImage)}
-                            onMouseLeave={handleMouseLeave}
-                            // Removed handleMouseMove to stop tracking
-                            onClick={() => handleOpenModal(item.letterImage)}
+                            // Conditionally set cursor-pointer and handlers only if an image exists
+                            className={`experience-item ${item.letterImage ? 'cursor-pointer' : ''}`} 
+                            onMouseEnter={() => item.letterImage && handleMouseEnter(item.letterImage)}
+                            onMouseLeave={() => item.letterImage && handleMouseLeave()}
+                            onClick={() => item.letterImage && handleOpenModal(item.letterImage)}
                         >
                             <p className="text-xl text-muted-foreground">{item.company}</p>
-                            <p className="text-5xl font-anton leading-none mt-3.5 mb-2.5">{item.title}</p>
+                            <p className="text-5xl text-stroke font-anton leading-none mt-3.5 mb-2.5">{item.title}</p>
                             <p className="text-lg text-muted-foreground">{item.duration}</p>
                         </div>
                     ))}
                 </div>
             </div>
 
-            {/* FIXED RIGHT IMAGE */}
-            <div className="fixed top-1/2 right-50 -translate-y-1/2 z-40 pointer-events-none hidden lg:block">
+            {/* FIXED RIGHT IMAGE - Only renders if imgSrc is set */}
+        {imgSrc ? ( <div className="fixed top-1/2 right-50 -translate-y-1/2 z-40 pointer-events-none hidden lg:block">
                 <img
                     ref={imageRef}
                     src={imgSrc}
@@ -125,7 +125,8 @@ const Experience = () => {
                         objectFit: 'contain'
                     }}
                 />
-            </div>
+            </div>):('')}
+           
 
             {/* MODAL VIEW */}
             {selectedImg && (

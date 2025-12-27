@@ -156,6 +156,8 @@ const Hero = () => {
     return () => ctx.revert();
   }, []);
 
+  const cvPath = '/cv/Albert ATS CV.pdf'
+
   return (
     <section
       id="home"
@@ -204,7 +206,8 @@ const Hero = () => {
             className="mt-6"
           >
             <a
-              href="#cv"
+                href={cvPath}
+              target="_blank"
               className="inline-flex items-center gap-2 border-b-2 border-gray-400 pb-1 text-blue-600 hover:text-black hover:border-black transition-all duration-300 group"
             >
               <span className="text-base">Download CV</span>
@@ -217,10 +220,10 @@ const Hero = () => {
         <div className="flex items-center justify-center gap-8 mt-8 w-full">
           {/* Social Icons */}
           <div ref={socialRef} className="flex gap-4 cursor-pointer">
-            <FaFacebookSquare color="black" size={24} className="hover:opacity-70 transition-opacity" />
-            <FaInstagramSquare color="black" size={24} className="hover:opacity-70 transition-opacity" />
-            <FaLinkedin color="black" size={24} className="hover:opacity-70 transition-opacity" />
-            <FaGithub color="black" size={24} className="hover:opacity-70 transition-opacity" />
+             <a href="https://www.facebook.com/albert.belbase.12" target="_blank"><FaFacebookSquare color="black" size={24} className="hover:opacity-70 transition-opacity"/></a>
+           <a href="https://www.instagram.com/albertbelbase12/" target="_blank"><FaInstagramSquare color="black" size={24} className="hover:opacity-70 transition-opacity"  /></a>
+           <a href="https://www.linkedin.com/in/albert-belbase-a8a666281/" target="_blank"><FaLinkedin color="black" size={24} className="hover:opacity-70 transition-opacity"  /></a>
+           <a href="https://github.com/alvert-git" target="_blank"><FaGithub color="black" size={24} className="hover:opacity-70 transition-opacity"  /></a>
           </div>
 
           {/* Chat Button */}
@@ -263,7 +266,8 @@ const Hero = () => {
             className="mt-8"
           >
             <a
-              href="#cv"
+              href={cvPath}
+              target="_blank"
               className="inline-flex items-center gap-2 border-b-2 border-gray-400 pb-1 text-blue-600 hover:text-black hover:border-black transition-all duration-300 group"
             >
               <span className="text-lg">Download CV</span>
@@ -306,10 +310,10 @@ const Hero = () => {
 
           {/* Social Icons */}
           <div ref={socialRef} className="flex flex-col gap-3 cursor-pointer">
-            <FaFacebookSquare color="black" size={24} className="hover:opacity-70 transition-opacity" />
-            <FaInstagramSquare color="black" size={24} className="hover:opacity-70 transition-opacity" />
-            <FaLinkedin color="black" size={24} className="hover:opacity-70 transition-opacity" />
-            <FaGithub color="black" size={24} className="hover:opacity-70 transition-opacity" />
+           <a href="https://www.facebook.com/albert.belbase.12" target="_blank"><FaFacebookSquare color="black" size={24} className="hover:opacity-70 transition-opacity"/></a>
+           <a href="https://www.instagram.com/albertbelbase12/" target="_blank"><FaInstagramSquare color="black" size={24} className="hover:opacity-70 transition-opacity"  /></a>
+           <a href="https://www.linkedin.com/in/albert-belbase-a8a666281/" target="_blank"><FaLinkedin color="black" size={24} className="hover:opacity-70 transition-opacity"  /></a>
+           <a href="https://github.com/alvert-git" target="_blank"><FaGithub color="black" size={24} className="hover:opacity-70 transition-opacity"  /></a>
           </div>
 
           {/* Chat Button */}

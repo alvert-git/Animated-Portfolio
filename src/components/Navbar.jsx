@@ -15,13 +15,14 @@ const Navbar = () => {
     { id: 1, text: 'About Me', href: '#about' },
     { id: 2, text: 'Skills', href: '#my-stack' },
     { id: 3, text: 'Projects', href: '#projects' },
-    { id: 4, text: 'Blog', href: '#blog' },
+    { id: 4, text: 'Experience', href: '#experience' },
+    { id: 4, text: 'Certificate', href: '#certificates' },
   ];
 
   return (
     // Outer container for the full width navbar
     // Added shadow-sm for better visual separation
-    <nav className="bg-white p-4 cursor-pointer ">
+    <nav className="bg-[#efefef] p-4 cursor-pointer ">
       {/* Inner container to hold the content and apply the flex layout */}
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         
@@ -54,7 +55,7 @@ const Navbar = () => {
             
             {/* Contact Me Link (Desktop Only) */}
             <Link
-              to="#contact" 
+              to="mailto:albertbelbase018@gmail.com" 
               className="hidden md:block text-base font-semibold text-black py-2 px-4 cursor-pointer"
             >
               Contact Me.
@@ -100,7 +101,7 @@ const Navbar = () => {
               
               {/* Contact Me Link (Mobile) */}
               <li className="p-4 border-b border-gray-100 text-gray-700 hover:text-black transition duration-150 ease-in-out" onClick={handleNav}>
-                <a href="#contact">Contact Me.</a>
+                <a href="mailto:albertbelbase018@gmail.com">Contact Me.</a>
               </li>
             </ul>
           </div>

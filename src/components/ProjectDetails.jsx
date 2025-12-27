@@ -1,5 +1,5 @@
-// ProjectDetails.jsx (REVISED)
-import React from 'react';
+// ProjectDetails.jsx (REVISED with Scroll to Top)
+import React, { useEffect } from 'react'; // <-- Import useEffect here
 import { useParams } from 'react-router-dom';
 import { projectsData } from '../lib/data'; // Adjust path as needed
 import { MY_STACK } from '../lib/data'; // To get the logos
@@ -27,6 +27,13 @@ const getStackLogos = (stackString) => {
 const ProjectDetails = () => {
   const { id } = useParams();
   const project = projectsData.find(p => p.id === parseInt(id));
+
+  // ******************************************************
+  // ADDED: Scroll to the top of the page when the component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  // ******************************************************
 
   // Handle case where project is not found
   if (!project) {

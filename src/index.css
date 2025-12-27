@@ -18,10 +18,26 @@
 
 body {
   font-family: var(--font-poppins);
+  background-color: #efefef;
 }
 
 .text-stroke {
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 1px black; /* Adjust color and thickness as needed */
   color: transparent; /* Fallback for non-webkit browsers */
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.marquee {
+  animation: marquee 30s linear infinite; /* Adjust '30s' for speed */
+  white-space: nowrap;
+  display: inline-block;
 }

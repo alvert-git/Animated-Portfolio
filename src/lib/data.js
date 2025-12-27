@@ -183,8 +183,48 @@ export const MY_EXPERIENCE = [
     {
         title: 'Graphic Designer Intern',
         company: 'Wild Boar Technology ',
-        duration: '2022-2023 ( 1 Year )',
+        duration: '2023-2024 ( 1 Year )',
         letterImage: '/experience/wbt.png'
+    },
+     {
+        title: 'Digital Marketing',
+        company: 'Food Aaja Co.',
+        duration: '2022-2023',
     },
     
 ];
+
+export const CERTIFICATES = [
+  {
+    id: 1,
+    title: "Asian Hackathon",
+    issuer: "Asian School of Management and Technology",
+    image: "/certificate/asian.png", // Placeholder image path
+  },
+  {
+    id: 2,
+    title: "Codefest Hackathon",
+    issuer: "Code Fest",
+    image: "/certificate/codefest.jpg",
+  }
+];
+
+export const EXTRA = [
+    {
+        image:"other/wbt.png",
+        caption:"My first Internship Experience"
+    },
+      {
+        image:"other/asian.jpeg",
+        caption:"Experience at Asian Hackathon"
+    },
+    {
+        image:"other/chess.png",
+        caption:"Chess as a Hobby"
+    },
+    {
+        image:"other/codefest.png",
+        caption:"Codefest Hackathon"
+    },
+
+]

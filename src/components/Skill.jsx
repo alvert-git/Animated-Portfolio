@@ -69,7 +69,7 @@ const Skills = () => {
                         <div className="grid sm:grid-cols-12" key={key}>
                             {/* Category Title */}
                             <div className="sm:col-span-5 mt-5">
-                                <p className="slide-up text-4xl font-anton leading-none text-muted-foreground uppercase">
+                                <p className="slide-up text-4xl font-anton text-stroke leading-none text-muted-foreground uppercase">
                                     {key}
                                 </p>
                                 
